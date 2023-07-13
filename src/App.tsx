@@ -4,7 +4,7 @@ import Countries from '@/Countries';
 import { Container } from '@/components/UI/container';
 
 function App() {
-  const toggleDarkMode = useDarkMode();
+  const { toggleDarkMode } = useDarkMode();
   return (
     <>
       <Header toggleDarkMode={toggleDarkMode} />

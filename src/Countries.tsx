@@ -1,5 +1,5 @@
 import useCountries from '@/hooks/useCountries';
-import { Region } from '@/utils/types';
+import { Region } from '@/types/types';
 import CountriesListView from '@/views/CountriesListView';
 import CountryDetailView from '@/views/CountryDetailView';
 import ErrorView from '@/views/Error';
@@ -9,12 +9,7 @@ export default function Countries() {
   const [searchQuery, setSearchQuery] = useState('');
   const [region, setRegion] = useState<Region | undefined>(undefined);
   const [country, setCountry] = useState<string>('');
-
-  const {
-    data: countriesList,
-    loading,
-    error,
-  } = useCountries(searchQuery, region);
+  const { countriesList, loading, error } = useCountries(searchQuery, region);
 
   const handleSearchQueryChange = (
     event: React.ChangeEvent<HTMLInputElement>,
