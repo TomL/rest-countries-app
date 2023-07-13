@@ -1,10 +1,7 @@
 import { CountryCode } from '@/types/countries';
 
-//export const API_URL = 'https://rest-countries-server.vercel.app/countries/';
-
 export const API_URL = 'https://restcountries.com/v3.1/';
-export const FIELDS = 'name,cca3,capital,region,population,flags';
-export const FIELDS_DETAILS =
+export const FIELDS =
   'name,cca3,capital,region,subregion,population,borders,flags,currencies,languages,tld';
 
 // As we know the data is static, we can look up countries from an object

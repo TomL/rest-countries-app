@@ -3,7 +3,7 @@ import { Country } from '@/types/countries';
 import { useState, useEffect } from 'react';
 
 export default function useFetch(searchParams?: string) {
-  const [countriesList, setCountriesList] = useState<Country[]>([]);
+  const [countryList, setcountryList] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -15,15 +15,19 @@ export default function useFetch(searchParams?: string) {
     (async () => {
       try {
         const url = `${API_URL}${searchParams}`;
+        console.log(url);
         const res = await fetch(url);
+
+        //console.log(res.status);
 
         if (res.ok) {
           const data = await res.json();
           // If data is not an array, make it one to ensure consistent data structure
-          setCountriesList(Array.isArray(data) ? data : [data]);
+          setcountryList(Array.isArray(data) ? data : [data]);
         } else {
+          //console.log('else');
           if (res.status === 404) {
-            setCountriesList([]);
+            setcountryList([]);
           } else {
             throw new Error(res.statusText);
           }
@@ -37,5 +41,5 @@ export default function useFetch(searchParams?: string) {
     })();
   }, [searchParams]);
 
-  return { countriesList, loading, error, setCountriesList };
+  return { countryList, loading, error, setcountryList };
 }

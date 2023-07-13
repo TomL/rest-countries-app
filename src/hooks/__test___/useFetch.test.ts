@@ -19,30 +19,37 @@ describe('useFetch', () => {
 
   it('should set loading state correctly', async () => {
     fetchMock.mock(
-      `${API_URL}alpha/VNM`,
+      `${API_URL}all2`,
       new Promise((resolve) => setTimeout(() => resolve({}), 100)),
     );
 
     let hookResult: any;
     await act(async () => {
-      hookResult = renderHook(() => useFetch('alpha/VNM'));
+      hookResult = renderHook(() => useFetch('all2'));
     });
 
-    // Check the 'loading' state variable is true initially
     expect(hookResult.result.current.loading).toBe(true);
   });
 
   it('should set error state correctly when fetch fails', async () => {
-    fetchMock.mock(`${API_URL}alpha/VNM`, 500);
+    fetchMock.mock(`${API_URL}all`, 500);
 
     let hook: any;
     await act(async () => {
-      hook = renderHook(() => useFetch('alpha/VNM'));
-      // Wait for the fetch to complete
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      hook = renderHook(() => useFetch('all'));
     });
 
-    // Check the 'error' state variable is set
     expect(hook.result.current.error).not.toBe('');
+  });
+
+  it('should set countryList to an empty array when fetch returns 404', async () => {
+    fetchMock.mock(`${API_URL}all4`, 404);
+
+    let hook: any;
+    await act(async () => {
+      hook = renderHook(() => useFetch('all4'));
+    });
+
+    expect(hook.result.current.countryList).toEqual([]);
   });
 });

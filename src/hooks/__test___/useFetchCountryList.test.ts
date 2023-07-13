@@ -6,7 +6,7 @@ import 'whatwg-fetch';
 import { renderHook } from '@testing-library/react';
 import fetchMock from 'fetch-mock';
 import { act } from 'react-test-renderer';
-import useCountries from '@/hooks/useCountries';
+import useFetchCountryList from '@/hooks/useFetchCountryList';
 import { API_URL, FIELDS } from '@/constants/constants';
 import { Region } from '@/types/countries';
 
@@ -42,13 +42,14 @@ describe('useCountry', () => {
 
     let hookResult: any;
     await act(async () => {
-      hookResult = renderHook(() => useCountries('bang', Region['Asia']));
+      hookResult = renderHook(() =>
+        useFetchCountryList('bang', Region['Asia']),
+      );
     });
 
-    // Check the 'countriesList' state variable has the correct data
-    expect(hookResult.result.current.countriesList).toHaveLength(2);
-    expect(hookResult.result.current.countriesList[0].name).toBe('Bangladesh');
-    expect(hookResult.result.current.countriesList[1].name).toBe('Thailand');
+    expect(hookResult.result.current.countryList).toHaveLength(2);
+    expect(hookResult.result.current.countryList[0].name).toBe('Bangladesh');
+    expect(hookResult.result.current.countryList[1].name).toBe('Thailand');
   });
 
   it('should make correct API call when only search is provided', async () => {
@@ -60,12 +61,11 @@ describe('useCountry', () => {
 
     let hookResult: any;
     await act(async () => {
-      hookResult = renderHook(() => useCountries('test'));
+      hookResult = renderHook(() => useFetchCountryList('test'));
     });
 
-    // Check the 'countriesList' state variable has the correct data
-    expect(hookResult.result.current.countriesList).toHaveLength(1);
-    expect(hookResult.result.current.countriesList[0].name).toBe('Country1');
+    expect(hookResult.result.current.countryList).toHaveLength(1);
+    expect(hookResult.result.current.countryList[0].name).toBe('Country1');
   });
 
   it('should make correct API call when only region is provided', async () => {
@@ -84,12 +84,13 @@ describe('useCountry', () => {
 
     let hookResult: any;
     await act(async () => {
-      hookResult = renderHook(() => useCountries(undefined, Region['Europe']));
+      hookResult = renderHook(() =>
+        useFetchCountryList(undefined, Region['Europe']),
+      );
     });
 
-    // Check the 'countriesList' state variable has the correct data
-    expect(hookResult.result.current.countriesList).toHaveLength(1);
-    expect(hookResult.result.current.countriesList[0].name).toBe('Country1');
+    expect(hookResult.result.current.countryList).toHaveLength(1);
+    expect(hookResult.result.current.countryList[0].name).toBe('Country1');
   });
 
   it('should make correct API call when no parameters are provided', async () => {
@@ -102,11 +103,10 @@ describe('useCountry', () => {
 
     let hookResult: any;
     await act(async () => {
-      hookResult = renderHook(() => useCountries());
+      hookResult = renderHook(() => useFetchCountryList());
     });
 
-    // Check the 'countriesList' state variable has the correct data
-    expect(hookResult.result.current.countriesList).toHaveLength(1);
-    expect(hookResult.result.current.countriesList[0].name).toBe('Country1');
+    expect(hookResult.result.current.countryList).toHaveLength(1);
+    expect(hookResult.result.current.countryList[0].name).toBe('Country1');
   });
 });
