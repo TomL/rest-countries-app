@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { SearchIcon } from './Icons';
 
 const inputStyle =
-  'h-12 focus:ring-0 focus-visible:outline-none border-0 rounded-md text-xs bg-white dark:bg-darkblue shadow-box lg:text-sm';
+  'h-12 dark:focus:ring-medgrey focus:ring-darkblue focus-visible:outline-none border-0 rounded-md text-xs bg-white dark:bg-darkblue shadow-box lg:text-sm';
 
 export function SearchBox({
   className,

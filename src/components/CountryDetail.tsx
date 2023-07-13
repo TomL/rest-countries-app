@@ -17,7 +17,6 @@ export default function CountryDetail({
   country: Country;
   handleSelectedCountryChange: (arg0: string) => void;
 }) {
-  console.log(country.borders);
   return (
     <article className="grid lg:grid-cols-2 lg:gap-30 gap-10 items-center justify-center">
       <div>
@@ -72,7 +71,7 @@ export default function CountryDetail({
           {country.borders &&
             country.borders.map((border) => (
               <Button
-                aria-label={`Go to ${country.name} details page`}
+                aria-label={`Go to ${country.name.common} details page`}
                 key={border}
                 onClick={() => handleSelectedCountryChange(border)}
               >

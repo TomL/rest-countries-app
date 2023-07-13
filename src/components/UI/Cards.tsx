@@ -1,16 +1,27 @@
 import { DetailsList, SmallHeading } from '@/components/UI/Texts';
+import clsx from 'clsx';
+
+interface CardWithImageProps extends React.HTMLAttributes<HTMLElement> {
+  image: string;
+  name: string;
+  details: { title: string; body: string }[];
+}
 
 export function CardWithImage({
   image,
   name,
   details,
-}: {
-  image: string;
-  name: string;
-  details: { title: string; body: string }[];
-}) {
+  className,
+  ...props
+}: CardWithImageProps) {
   return (
-    <article className="rounded-md bg-white dark:bg-darkblue w-68 overflow-hidden shadow-box text-left h-full">
+    <article
+      className={clsx(
+        'rounded-md bg-white dark:bg-darkblue w-68 overflow-hidden shadow-box text-left h-full',
+        className,
+      )}
+      {...props}
+    >
       <img
         className="h-40 w-68"
         src={image}

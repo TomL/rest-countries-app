@@ -15,17 +15,13 @@ export default function useFetch(searchParams?: string) {
     (async () => {
       try {
         const url = `${API_URL}${searchParams}`;
-        console.log(url);
         const res = await fetch(url);
-
-        //console.log(res.status);
 
         if (res.ok) {
           const data = await res.json();
           // If data is not an array, make it one to ensure consistent data structure
           setcountryList(Array.isArray(data) ? data : [data]);
         } else {
-          //console.log('else');
           if (res.status === 404) {
             setcountryList([]);
           } else {

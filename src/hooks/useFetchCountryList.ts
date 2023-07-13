@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 
 export default function useFetchCountryList(search?: string, region?: Region) {
   const query = (search ? `name/${search}` : 'all') + `?fields=${FIELDS}`;
-  console.log('query', query);
   const { countryList, loading, error } = useFetch(query);
 
   // filter by region manually, as the api doesn't support chaining parameters
