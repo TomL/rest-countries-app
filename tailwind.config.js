@@ -19,8 +19,6 @@ export default {
       boxShadow: {
         header: '0 2px 4px hsl(0 0% 0% / 0.06)',
         box: '0 0 7px 2px hsl(0 0% 0% / 0.03)',
-        button: '0 0 4px 1px hsl(0 0% 0% / 0.11)',
-        darkbutton: '0 0 4px 1px hsl(200 15% 8% / 0.25)',
       },
       colors: {
         darkblue: 'hsl(209, 23%, 22%)',
@@ -32,9 +30,6 @@ export default {
       gridTemplateColumns: {
         countries: 'repeat(auto-fill,16.5rem)',
       },
-      lineHeight: {
-        7.5: '1.875rem' /* 30px */,
-      },
       maxWidth: {
         container: '84rem' /* 1344px (1280 plus padding) */,
       },
@@ -43,6 +38,10 @@ export default {
         18: '4.5rem' /* 72px */,
         30: '7.5rem' /* 120px */,
         68: '16.5rem' /* 264px */,
+      },
+      backgroundImage: {
+        selecticon: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23111517' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
+        selecticondark: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
       },
     },
   },

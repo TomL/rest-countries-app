@@ -10,7 +10,7 @@ export function SearchBox({
 }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="w-full max-w-md">
-      <SearchIcon className="h-4 w-4 lg:w-4.5 lg:h-4.5 absolute my-4 ml-8 fill:medgrey dark:fill-white" />
+      <SearchIcon className="h-4 w-4 lg:w-4.5 lg:h-4.5 absolute my-4 ml-8" />
       <input
         className={clsx('pl-18 w-full pr-8', inputStyle, className)}
         type="text"
@@ -21,7 +21,7 @@ export function SearchBox({
 }
 
 interface SelectBoxProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  title: string;
+  title?: string;
   options: string[];
 }
 
@@ -33,10 +33,14 @@ export function SelectBox({
 }: SelectBoxProps) {
   return (
     <select
-      className={clsx('px-6 min-w-select', inputStyle, className)}
+      className={clsx(
+        'px-6 bg-selecticon dark:bg-selecticondark',
+        inputStyle,
+        className,
+      )}
       {...props}
     >
-      <option value="">{title}</option>
+      {title && <option value="">{title}</option>}
       {options.map((option) => (
         <option key={option} value={option}>
           {option}
