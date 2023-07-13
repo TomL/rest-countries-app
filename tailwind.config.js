@@ -28,7 +28,7 @@ export default {
         medgrey: 'hsl(0, 0%, 52%)',
       },
       gridTemplateColumns: {
-        countries: 'repeat(auto-fill,16.5rem)',
+        countrylist: 'repeat(auto-fill,16.5rem)',
       },
       maxWidth: {
         container: '84rem' /* 1344px (1280 plus padding) */,

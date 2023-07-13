@@ -3,10 +3,12 @@ import { Region } from '@/types/countries';
 
 export default function CountryListNav({
   searchQuery,
+  region,
   handleSearchQueryChange,
   handleRegionChange,
 }: {
   searchQuery: string;
+  region: Region | undefined;
   handleSearchQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleRegionChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
@@ -24,6 +26,7 @@ export default function CountryListNav({
         title="Filter by Region"
         options={Object.values(Region)}
         onChange={handleRegionChange}
+        value={region}
       />
     </form>
   );

@@ -61,6 +61,7 @@ export default function Countries() {
         <>
           <CountryListNav
             searchQuery={searchQuery}
+            region={region}
             handleSearchQueryChange={handleSearchQueryChange}
             handleRegionChange={handleRegionChange}
           />
