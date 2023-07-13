@@ -34,7 +34,7 @@ export function SelectBox({
   return (
     <select
       className={clsx(
-        'px-6 bg-selecticon dark:bg-selecticondark',
+        'px-6 bg-selecticon dark:bg-selecticondark cursor-pointer',
         inputStyle,
         className,
       )}
