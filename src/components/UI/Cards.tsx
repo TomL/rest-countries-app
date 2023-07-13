@@ -12,7 +12,7 @@ export function CardWithImage({
   return (
     <article className="rounded-md bg-white dark:bg-darkblue w-68 overflow-hidden shadow-box text-left h-full">
       <img
-        className="h-40 w-68 object-cover"
+        className="h-40 w-68"
         src={image}
         height={160}
         width={264}
