@@ -8,7 +8,7 @@ import fetchMock from 'fetch-mock';
 import { act } from 'react-test-renderer';
 import useCountries from '@/hooks/useCountries';
 import { API_URL } from '@/constants/constants';
-import { Region } from '@/types/types';
+import { Region } from '@/types/countries';
 
 describe('useCountry', () => {
   beforeAll(() => {
@@ -19,15 +19,23 @@ describe('useCountry', () => {
   });
 
   it('should return countries list with a successful api request', async () => {
-    fetchMock.mock(`${API_URL}?q=bang&region=Asia`, [
+    fetchMock.mock(`${API_URL}name/bang`, [
       {
         name: 'Bangladesh',
         alpha3Code: 'BGD',
+        region: 'Asia',
         // other country properties...
       },
       {
         name: 'Thailand',
         alpha3Code: 'THA',
+        region: 'Asia',
+        // other country properties...
+      },
+      {
+        name: 'Barbados',
+        alpha3Code: 'BRB',
+        region: 'Americas',
         // other country properties...
       },
     ]);
@@ -44,7 +52,7 @@ describe('useCountry', () => {
   });
 
   it('should make correct API call when only search is provided', async () => {
-    fetchMock.mock(`${API_URL}?q=test`, [
+    fetchMock.mock(`${API_URL}name/test`, [
       {
         name: 'Country1',
       },
@@ -61,9 +69,15 @@ describe('useCountry', () => {
   });
 
   it('should make correct API call when only region is provided', async () => {
-    fetchMock.mock(`${API_URL}?region=Europe`, [
+    fetchMock.mock(`${API_URL}all`, [
       {
         name: 'Country1',
+        region: 'Europe',
+        // other country properties...
+      },
+      {
+        name: 'Country2',
+        region: 'Americas',
         // other country properties...
       },
     ]);
@@ -79,7 +93,7 @@ describe('useCountry', () => {
   });
 
   it('should make correct API call when no parameters are provided', async () => {
-    fetchMock.mock(`${API_URL}?`, [
+    fetchMock.mock(`${API_URL}all`, [
       {
         name: 'Country1',
         // other country properties...

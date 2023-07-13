@@ -1,7 +1,6 @@
 import useFetch from '@/hooks/useFetch';
 
 export default function useCountry(countryCode: string) {
-  const query = new URLSearchParams();
-  query.append('alpha3Code', countryCode);
+  const query = `alpha/${countryCode}`;
   return useFetch(query.toString());
 }

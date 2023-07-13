@@ -1,7 +1,8 @@
 import { SearchBox, SelectBox } from '@/components/UI/input';
 import CountryList from '@/components/countryList';
-import { Country, Region } from '@/types/types';
+import { Country, Region } from '@/types/countries';
 import LoadingView from '@/views/Loading';
+import { formatCurrencies } from '@/utils/format';
 
 export default function CountriesListView({
   countriesList,

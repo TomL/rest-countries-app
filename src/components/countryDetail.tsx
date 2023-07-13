@@ -1,8 +1,14 @@
 import { Button } from '@/components/UI/button';
 import { LargeHeading, DetailsList } from '@/components/UI/text';
 import { CountryCodes } from '@/constants/constants';
-import { formatNumberToString, formatListToString } from '@/utils/format';
-import { Country } from '@/types/types';
+import {
+  formatNumberToString,
+  formatListToString,
+  formatCurrencies,
+  formatNativeNames,
+  formatLanguages,
+} from '@/utils/format';
+import { Country } from '@/types/countries';
 
 export default function CountryDetail({
   country,
@@ -16,42 +22,39 @@ export default function CountryDetail({
       <img
         className="rounded-md"
         src={country.flags.svg}
-        alt={`Flag of ${country.name}`}
+        alt={`Flag of ${country.name.common}`}
       />
       <div className="space-y-8">
-        <LargeHeading>{country.name}</LargeHeading>
+        <LargeHeading>{country.name.common}</LargeHeading>
         <div className="grid lg:grid-cols-2 gap-y-8">
           <DetailsList
             details={[
-              { title: 'Native Name', body: country.nativeName },
+              {
+                title: 'Native Name',
+                body: formatNativeNames(country.name.nativeName),
+              },
               {
                 title: 'Population',
                 body: formatNumberToString(country.population),
               },
               { title: 'Region', body: country.region },
-              { title: 'Sub Region', body: country.subregion },
-              { title: 'Capital', body: country.capital || 'None' },
+              { title: 'Sub Region', body: country.subregion || 'None' },
+              { title: 'Capital', body: formatListToString(country.capital) },
             ]}
           />
           <DetailsList
             details={[
               {
                 title: 'Top Level Domain',
-                body: formatListToString(country.topLevelDomain),
+                body: formatListToString(country.tld),
               },
               {
                 title: 'Currencies',
-                body: formatListToString(
-                  country.currencies
-                    ? country.currencies.map((currency) => currency.name)
-                    : [],
-                ),
+                body: formatCurrencies(country.currencies),
               },
               {
                 title: 'Languages',
-                body: formatListToString(
-                  country.languages.map((language) => language.name),
-                ),
+                body: formatLanguages(country.languages),
               },
             ]}
           />

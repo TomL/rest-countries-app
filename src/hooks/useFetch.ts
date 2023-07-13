@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants/constants';
-import { Country } from '@/types/types';
+import { Country } from '@/types/countries';
 import { useState, useEffect } from 'react';
 
 export default function useFetch(searchParams?: string) {
@@ -10,7 +10,7 @@ export default function useFetch(searchParams?: string) {
   useEffect(() => {
     // reset loading on params change
     setLoading(true);
-    const url = `${API_URL}?${searchParams}`;
+    const url = `${API_URL}${searchParams}`;
 
     (async () => {
       try {
@@ -24,13 +24,11 @@ export default function useFetch(searchParams?: string) {
           throw new Error(res.statusText);
         }
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-          setLoading(false);
-        }
+        setError((error as Error).message);
+        setLoading(false);
       }
     })();
   }, [searchParams]);
 
-  return { countriesList, loading, error };
+  return { countriesList, loading, error, setCountriesList };
 }

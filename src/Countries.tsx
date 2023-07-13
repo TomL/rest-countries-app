@@ -1,5 +1,5 @@
 import useCountries from '@/hooks/useCountries';
-import { Region } from '@/types/types';
+import { Region } from '@/types/countries';
 import CountriesListView from '@/views/CountriesListView';
 import CountryDetailView from '@/views/CountryDetailView';
 import ErrorView from '@/views/Error';
