@@ -17,8 +17,12 @@ export default function useFetch(searchParams?: string) {
         const res = await fetch(url);
 
         if (res.ok) {
-          const countriesList = await res.json();
-          setCountriesList(countriesList);
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            setCountriesList(data);
+          } else {
+            setCountriesList([data]);
+          }
           setLoading(false);
         } else {
           throw new Error(res.statusText);
