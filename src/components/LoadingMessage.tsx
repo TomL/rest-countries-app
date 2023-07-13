@@ -1,6 +1,6 @@
-import { LoadingIcon } from '@/components/UI/icons';
+import { LoadingIcon } from '@/components/UI/Icons';
 
-export default function LoadingView() {
+export default function LoadingMessage() {
   return (
     <div className="flex justify-center items-center">
       <LoadingIcon className="animate-spin" />

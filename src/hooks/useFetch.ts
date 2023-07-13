@@ -8,27 +8,30 @@ export default function useFetch(searchParams?: string) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // reset loading on params change
+    // reset on params change
     setLoading(true);
-    const url = `${API_URL}${searchParams}`;
+    setError('');
 
     (async () => {
       try {
+        const url = `${API_URL}${searchParams}`;
         const res = await fetch(url);
 
         if (res.ok) {
           const data = await res.json();
-          if (Array.isArray(data)) {
-            setCountriesList(data);
-          } else {
-            setCountriesList([data]);
-          }
-          setLoading(false);
+          // If data is not an array, make it one to ensure consistent data structure
+          setCountriesList(Array.isArray(data) ? data : [data]);
         } else {
-          throw new Error(res.statusText);
+          if (res.status === 404) {
+            setCountriesList([]);
+          } else {
+            throw new Error(res.statusText);
+          }
         }
       } catch (error) {
         setError((error as Error).message);
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
     })();

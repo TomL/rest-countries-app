@@ -1,4 +1,4 @@
-import { DetailsList, SmallHeading } from '@/components/UI/text';
+import { DetailsList, SmallHeading } from '@/components/UI/Texts';
 
 export function CardWithImage({
   image,

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { SearchIcon } from './icons';
+import { SearchIcon } from './Icons';
 
 const inputStyle =
   'h-12 focus:ring-0 focus-visible:outline-none border-0 rounded-md text-xs bg-white dark:bg-darkblue shadow-box lg:text-sm';

@@ -1,12 +1,15 @@
-import { SearchBox, SelectBox } from '@/components/UI/input';
-import CountryList from '@/components/countryList';
+import { SearchBox, SelectBox } from '@/components/UI/Inputs';
 import { Country, Region } from '@/types/countries';
-import LoadingView from '@/views/Loading';
-import { formatCurrencies } from '@/utils/format';
+import { CardWithImage } from '@/components/UI/Cards';
+import { formatListToString, formatNumberToString } from '@/utils/format';
+import LoadingMessage from '@/components/LoadingMessage';
+import InfoMessage from '@/components/InfoMessage';
+import ErrorMessage from '@/components/ErrorMessage';
 
 export default function CountriesListView({
   countriesList,
   loading,
+  error,
   searchQuery,
   handleSearchQueryChange,
   handleRegionChange,
@@ -14,6 +17,7 @@ export default function CountriesListView({
 }: {
   countriesList: Country[];
   loading: boolean;
+  error: string;
   searchQuery: string;
   handleSearchQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleRegionChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -37,10 +41,50 @@ export default function CountriesListView({
         />
       </form>
       {loading ? (
-        <LoadingView />
+        <LoadingMessage />
+      ) : error ? (
+        <ErrorMessage error={error} />
+      ) : countriesList.length < 1 ? (
+        <InfoMessage info="No countries found" />
       ) : (
         <CountryList countryList={countriesList} setCountry={setCountry} />
       )}
     </>
+  );
+}
+
+function CountryList({
+  countryList,
+  setCountry,
+}: {
+  countryList: Country[];
+  setCountry: (country: string) => void;
+}) {
+  return (
+    <div className="grid grid-cols-countries  items-stretch justify-around lg:justify-between gap-x-8 lg:gap-y-16 gap-y-10">
+      {countryList.map((country) => {
+        return (
+          <button
+            aria-label={`Go to ${country.name} details page`}
+            key={country.cca3}
+            type="button"
+            onClick={() => setCountry(country.cca3)}
+          >
+            <CardWithImage
+              image={country.flags.png}
+              name={country.name.common}
+              details={[
+                {
+                  title: 'Population',
+                  body: formatNumberToString(country.population),
+                },
+                { title: 'Region', body: country.region },
+                { title: 'Capital', body: formatListToString(country.capital) },
+              ]}
+            />
+          </button>
+        );
+      })}
+    </div>
   );
 }

@@ -1,7 +1,7 @@
-import Header from '@/components/header';
+import Header from '@/components/Header';
 import useDarkMode from '@/hooks/useDarkMode';
 import Countries from '@/Countries';
-import { Container } from '@/components/UI/container';
+import { Container } from '@/components/UI/Containers';
 
 function App() {
   const { toggleDarkMode } = useDarkMode();

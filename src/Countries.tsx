@@ -2,7 +2,6 @@ import useCountries from '@/hooks/useCountries';
 import { Region } from '@/types/countries';
 import CountriesListView from '@/views/CountriesListView';
 import CountryDetailView from '@/views/CountryDetailView';
-import ErrorView from '@/views/Error';
 import { useState } from 'react';
 
 export default function Countries() {
@@ -25,8 +24,6 @@ export default function Countries() {
     }
   };
 
-  if (!loading && error) return <ErrorView error={error} />;
-
   if (country) {
     return <CountryDetailView countryCode={country} setCountry={setCountry} />;
   } else {
@@ -34,6 +31,7 @@ export default function Countries() {
       <CountriesListView
         countriesList={countriesList}
         loading={loading}
+        error={error}
         searchQuery={searchQuery}
         handleSearchQueryChange={handleSearchQueryChange}
         handleRegionChange={handleRegionChange}

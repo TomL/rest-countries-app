@@ -1,6 +1,6 @@
-import { Container } from '@/components/UI/container';
-import { DarkModeIcon } from '@/components/UI/icons';
-import { MainHeading } from '@/components/UI/text';
+import { Container } from '@/components/UI/Containers';
+import { DarkModeIcon } from '@/components/UI/Icons';
+import { MainHeading } from '@/components/UI/Texts';
 
 export default function Header({
   toggleDarkMode,
