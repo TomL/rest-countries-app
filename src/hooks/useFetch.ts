@@ -1,9 +1,9 @@
-import { API_URL } from '@/utils/constants';
-import { Country } from '@/utils/types';
-import { useState, useEffect, SetStateAction } from 'react';
+import { API_URL } from '@/constants/constants';
+import { Country } from '@/types/types';
+import { useState, useEffect } from 'react';
 
 export default function useFetch(searchParams?: string) {
-  const [data, setData] = useState<Country[]>([]);
+  const [countriesList, setCountriesList] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -12,23 +12,25 @@ export default function useFetch(searchParams?: string) {
     setLoading(true);
     const url = `${API_URL}?${searchParams}`;
 
-    fetch(url)
-      .then((res) => {
+    (async () => {
+      try {
+        const res = await fetch(url);
+
         if (res.ok) {
-          return res.json();
+          const countriesList = await res.json();
+          setCountriesList(countriesList);
+          setLoading(false);
         } else {
           throw new Error(res.statusText);
         }
-      })
-      .then((data: Country[]) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error: SetStateAction<string>) => {
-        setError(error.toString());
-        setLoading(false);
-      });
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+          setLoading(false);
+        }
+      }
+    })();
   }, [searchParams]);
 
-  return { data, loading, error };
+  return { countriesList, loading, error };
 }

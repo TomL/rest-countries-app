@@ -36,5 +36,5 @@ export default function useDarkMode() {
     }
   }, [darkMode]);
 
-  return toggleDarkMode;
+  return { darkMode, toggleDarkMode };
 }

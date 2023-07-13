@@ -1,5 +1,5 @@
 import useFetch from '@/hooks/useFetch';
-import { Region } from '@/utils/types';
+import { Region } from '@/types/types';
 
 export default function useCountries(search?: string, region?: Region) {
   const query = new URLSearchParams();
